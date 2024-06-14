@@ -920,3 +920,72 @@ By following this structured approach, you can effectively tackle Kaggle competi
    ```
 
 By using these CLI tools, you can efficiently load, explore, and summarize your data directly from the terminal, allowing you to quickly gain insights and identify potential issues with your dataset.
+
+
+---
+
+You're right; the method provided for checking missing values with `awk` can be cumbersome. Instead, using more advanced CLI tools that are designed for data processing can be more effective. Here's a better approach:
+
+### Improved CLI Tools for Checking Missing Values
+
+#### Using `csvkit`
+
+- **`csvstat`**: This tool can provide comprehensive statistics about the CSV file, including the count of missing values.
+
+  ```sh
+  csvstat --nulls competitions/titanic/data/raw/train.csv
+  ```
+
+  This command will give you a detailed report on each column, including the number of null values.
+
+#### Using `datamash`
+
+- **`datamash`**: This tool can be used to count the number of missing values in each column.
+
+  ```sh
+  cut -d, -f1- competitions/titanic/data/raw/train.csv | datamash transpose | awk '{print $0, NR-1}' | datamash countunique 1
+  ```
+
+  Here’s a more streamlined approach:
+  ```sh
+  cut -d, -f1- competitions/titanic/data/raw/train.csv | datamash transpose | grep -c '^$'
+  ```
+
+#### Using `mlr (Miller)`
+
+- **`mlr`**: Miller is a great tool for handling CSV files and can be very useful for checking missing values.
+
+  - **Installation**: Install Miller using your package manager.
+    ```sh
+    sudo apt-get install miller
+    ```
+    or
+    ```sh
+    brew install miller
+    ```
+
+  - **Usage**:
+    ```sh
+    mlr --csv stats1 -a count,nonnull -f all competitions/titanic/data/raw/train.csv
+    ```
+
+  This command will count the total and non-null values for each column, helping you identify the missing values easily.
+
+### Example Workflow for Improved Missing Values Check
+
+1. **Using `csvkit` to Get Detailed Statistics Including Null Counts**:
+   ```sh
+   csvstat --nulls competitions/titanic/data/raw/train.csv
+   ```
+
+2. **Using `mlr` (Miller) for Counting Null and Non-Null Values**:
+   ```sh
+   mlr --csv stats1 -a count,nonnull -f all competitions/titanic/data/raw/train.csv
+   ```
+
+3. **Using `datamash` for a Quick Count of Empty Fields**:
+   ```sh
+   cut -d, -f1- competitions/titanic/data/raw/train.csv | datamash transpose | grep -c '^$'
+   ```
+
+By using these tools, you can efficiently and accurately check for missing values in your dataset. These methods are more reliable and streamlined compared to using `awk` for this purpose.
