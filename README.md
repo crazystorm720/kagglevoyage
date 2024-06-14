@@ -720,3 +720,39 @@ To focus on using a remote ML workstation and ensuring that everything works hea
   ```
 
 By following these steps, you can effectively manage your Kaggle projects using a remote ML workstation, ensuring everything works headlessly and efficiently. If you need further customization or have additional requirements, feel free to ask!
+
+---
+
+```python
+import os
+
+def create_directory_structure(base_path):
+    competitions = ['titanic', 'competition_2']  # Add more competition names as needed
+
+    for competition in competitions:
+        paths = [
+            f"{base_path}/competitions/{competition}/data/raw",
+            f"{base_path}/competitions/{competition}/data/processed",
+            f"{base_path}/competitions/{competition}/notebooks",
+            f"{base_path}/competitions/{competition}/scripts",
+            f"{base_path}/competitions/{competition}/models",
+            f"{base_path}/competitions/{competition}/reports/figures"
+        ]
+
+        for path in paths:
+            os.makedirs(path, exist_ok=True)
+
+    shared_paths = [
+        f"{base_path}/shared/scripts",
+        f"{base_path}/shared/notebooks",
+        f"{base_path}/shared/data"
+    ]
+
+    for path in shared_paths:
+        os.makedirs(path, exist_ok=True)
+
+    print(f"Directory structure created under {base_path}")
+
+base_path = 'kagglevoyage'
+create_directory_structure(base_path)
+```
