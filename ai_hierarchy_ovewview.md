@@ -1,5 +1,57 @@
 ```markdown
 Artificial Intelligence (AI)
+├── Traditional Techniques
+│   ├── Supervised Learning
+│   │   ├── Classification
+│   │   │   ├── Decision Trees
+│   │   │   ├── Naive Bayes
+│   │   │   ├── Support Vector Machines (SVM)
+│   │   │   ├── K-Nearest Neighbors (KNN)
+│   │   │   ├── Logistic Regression
+│   │   │   └── Random Forest
+│   │   └── Regression
+│   │       ├── Linear Regression
+│   │       ├── Polynomial Regression
+│   │       ├── Ridge Regression
+│   │       ├── Lasso Regression
+│   │       ├── Elastic Net
+│   │       ├── Decision Trees
+│   │       └── Random Forest
+│   ├── Unsupervised Learning
+│   │   ├── Clustering
+│   │   │   ├── K-Means
+│   │   │   ├── Hierarchical Clustering
+│   │   │   └── Gaussian Mixture Models (GMM)
+│   │   ├── Dimensionality Reduction
+│   │   │   └── Principal Component Analysis (PCA)
+│   │   └── Anomaly Detection
+│   │       ├── Isolation Forest
+│   │       ├── One-Class SVM
+│   │       └── Local Outlier Factor (LOF)
+│   ├── Expert Systems
+│   │   ├── Rule-Based Systems
+│   │   └── Fuzzy Logic
+│   └── Probabilistic Graphical Models
+│       ├── Bayesian Networks
+│       ├── Markov Random Fields
+│       └── Hidden Markov Models (HMM)
+└── Deep Learning
+    ├── Artificial Neural Networks (ANN)
+    ├── Convolutional Neural Networks (CNN)
+    ├── Recurrent Neural Networks (RNN)
+    │   ├── Long Short-Term Memory (LSTM)
+    │   └── Gated Recurrent Units (GRU)
+    ├── Autoencoders
+    ├── Generative Adversarial Networks (GAN)
+    ├── Transformers
+    │   ├── Attention Mechanisms
+    │   ├── BERT
+    │   └── GPT
+    └── Graph Neural Networks (GNN)
+```
+
+```markdown
+Artificial Intelligence (AI)
 ├── Machine Learning (ML)
 │   ├── Supervised Learning
 │   │   ├── Classification
