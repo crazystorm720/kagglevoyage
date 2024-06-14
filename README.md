@@ -313,9 +313,7 @@ Practicing your CLI skills while working on the Kaggle competition is a great id
 
 - **Run a Python Script**:
   ```sh
-  python scripts
-
-/data_cleaning.py
+  python scripts/data_cleaning.py
   ```
 - **Jupyter Notebook via CLI**:
   ```sh
@@ -602,4 +600,123 @@ For more advanced CLI usage within the context of the Kaggle competition, you ca
      ./data_processing.sh
      ```
 
-By integrating these advanced CLI techniques into your workflow, you'll be able to handle tasks more efficiently and leverage the full power of the command line. If you have any specific tasks or further questions, feel free to ask!
+---
+
+### Remote ML Workstation Setup
+
+To focus on using a remote ML workstation and ensuring that everything works headlessly, follow these steps:
+
+#### 1. **Set Up the Remote Server**
+
+- **Access the Remote Server**:
+  ```sh
+  ssh user@remote_server_ip
+  ```
+
+- **Install Conda**:
+  ```sh
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  bash Miniconda3-latest-Linux-x86_64.sh
+  ```
+
+- **Clone the Repository**:
+  ```sh
+  git clone https://github.com/yourusername/kagglevoyage.git
+  cd kagglevoyage
+  ```
+
+- **Create and Activate Conda Environment**:
+  ```sh
+  conda env create -f environment.yml
+  conda activate kagglevoyage
+  ```
+
+#### 2. **Run Jupyter Notebook/Lab Headlessly**
+
+- **Install Jupyter Notebook Extensions**:
+  ```sh
+  conda install -c conda-forge jupyter_contrib_nbextensions
+  jupyter contrib nbextension install --user
+  ```
+
+- **Start
+
+ Jupyter Notebook or Lab**:
+  ```sh
+  jupyter lab --no-browser --port=8888
+  ```
+  or
+  ```sh
+  jupyter notebook --no-browser --port=8888
+  ```
+
+- **Set Up SSH Tunneling**:
+  On your local machine, run:
+  ```sh
+  ssh -N -f -L localhost:8888:localhost:8888 user@remote_server_ip
+  ```
+
+- **Access Jupyter in Browser**:
+  Open your browser and go to `http://localhost:8888`.
+
+#### 3. **Run Scripts Remotely**
+
+- **Run Data Processing Script**:
+  ```sh
+  ssh user@remote_server_ip "cd /path/to/kagglevoyage && conda activate kagglevoyage && python scripts/data_cleaning.py"
+  ```
+
+- **Use `tmux` to Manage Long-Running Processes**:
+  ```sh
+  ssh user@remote_server_ip
+  tmux new -s kaggle
+  cd /path/to/kagglevoyage
+  conda activate kagglevoyage
+  python scripts/train_model.py
+  [Ctrl+B, D] # Detach the tmux session
+  exit
+  ```
+
+- **Reattach to the tmux Session**:
+  ```sh
+  ssh user@remote_server_ip
+  tmux attach -t kaggle
+  ```
+
+#### 4. **Automate Workflow with Bash Script**
+
+- **Create a Bash Script**:
+  ```bash
+  #!/bin/bash
+  # remote_workflow.sh
+
+  # Clone the repository
+  git clone https://github.com/yourusername/kagglevoyage.git
+  cd kagglevoyage
+
+  # Create and activate conda environment
+  conda env create -f environment.yml
+  conda activate kagglevoyage
+
+  # Download Kaggle data
+  kaggle competitions download -c titanic -p competitions/titanic/data/raw
+  unzip competitions/titanic/data/raw/titanic.zip -d competitions/titanic/data/raw
+
+  # Run data processing script
+  python scripts/data_cleaning.py
+
+  # Run data processing script
+  python scripts/process_data.py
+
+  # Train model
+  python scripts/train_model.py
+
+  echo "Data processing and model training completed."
+  ```
+
+- **Run the Bash Script on the Remote Server**:
+  ```sh
+  ssh user@remote_server_ip "bash /path/to/remote_workflow.sh"
+  ```
+
+By following these steps, you can effectively manage your Kaggle projects using a remote ML workstation, ensuring everything works headlessly and efficiently. If you need further customization or have additional requirements, feel free to ask!
