@@ -1,3 +1,52 @@
+When it comes to time series data, such as forex ticks or MQTT sensor data, here's a focused hierarchy of the most widely used and relevant AI models:
+
+```
+Artificial Intelligence (AI)
+├── Traditional Techniques
+│   ├── Time Series Forecasting
+│   │   ├── Autoregressive Models
+│   │   │   ├── Autoregressive (AR)
+│   │   │   ├── Moving Average (MA)
+│   │   │   └── Autoregressive Moving Average (ARMA)
+│   │   ├── Autoregressive Integrated Moving Average (ARIMA)
+│   │   └── Seasonal ARIMA (SARIMA)
+│   └── Anomaly Detection
+│       ├── Isolation Forest
+│       ├── One-Class SVM
+│       └── Local Outlier Factor (LOF)
+└── Deep Learning
+    ├── Recurrent Neural Networks (RNN)
+    │   ├── Long Short-Term Memory (LSTM)
+    │   └── Gated Recurrent Units (GRU)
+    ├── Temporal Convolutional Networks (TCN)
+    └── Transformer-based Models
+        ├── Temporal Fusion Transformers (TFT)
+        └── Informer
+```
+
+In this focused hierarchy, we have:
+
+Traditional Techniques:
+- Time Series Forecasting:
+  - Autoregressive Models: Autoregressive (AR), Moving Average (MA), and Autoregressive Moving Average (ARMA)
+  - Autoregressive Integrated Moving Average (ARIMA)
+  - Seasonal ARIMA (SARIMA)
+- Anomaly Detection:
+  - Isolation Forest
+  - One-Class SVM
+  - Local Outlier Factor (LOF)
+
+Deep Learning:
+- Recurrent Neural Networks (RNN), including Long Short-Term Memory (LSTM) and Gated Recurrent Units (GRU)
+- Temporal Convolutional Networks (TCN)
+- Transformer-based Models, such as Temporal Fusion Transformers (TFT) and Informer
+
+These models are particularly well-suited for handling time series data, as they can capture temporal dependencies and patterns. The traditional techniques, such as ARIMA and its variants, have been widely used for time series forecasting, while anomaly detection methods like Isolation Forest and One-Class SVM can help identify unusual patterns or outliers in the data.
+
+Deep learning models, especially RNNs (LSTM and GRU), have shown great success in modeling complex time series patterns. TCNs and transformer-based models, such as TFT and Informer, have also gained popularity due to their ability to handle long-term dependencies and capture both local and global patterns in time series data.
+
+---
+
 ```markdown
 Artificial Intelligence (AI)
 ├── Traditional Techniques
