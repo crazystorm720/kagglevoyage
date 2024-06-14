@@ -817,3 +817,106 @@ create_directory_structure(base_path)
 - **Share Insights**: Share your insights and learnings with the community. Write blog posts, create tutorial notebooks, or engage in discussions on Kaggle forums.
 
 By following this structured approach, you can effectively tackle Kaggle competitions, from understanding the problem to submitting your final predictions. This method ensures a thorough exploration and modeling process, helping you achieve better results and gain valuable insights from each competition.
+
+---
+### CLI Tools for Initial Data Exploration
+
+#### 1. **Loading the Data**
+- **`cat`**: Display the content of the file.
+  ```sh
+  cat competitions/titanic/data/raw/train.csv
+  ```
+
+- **`head`** and **`tail`**: Display the first and last lines of the file.
+  ```sh
+  head -n 10 competitions/titanic/data/raw/train.csv
+  tail -n 10 competitions/titanic/data/raw/train.csv
+  ```
+
+- **`less`**: View the content of the file interactively.
+  ```sh
+  less competitions/titanic/data/raw/train.csv
+  ```
+
+#### 2. **Checking for Null Values**
+- **`awk`**: Process the CSV to count null values.
+  ```sh
+  awk -F, '{for(i=1;i<=NF;i++) if($i=="") c[i]++} END{for(i in c) print "Column " i ": " c[i] " null values"}' competitions/titanic/data/raw/train.csv
+  ```
+
+- **`grep`**: Find and count lines with missing values (assuming missing values are represented as empty strings).
+  ```sh
+  grep -c ',,' competitions/titanic/data/raw/train.csv
+  ```
+
+#### 3. **Checking Data Types**
+- **`csvkit`**: Use `csvkit` to get a summary of the CSV file, including data types.
+  - **Installation**: Install `csvkit` using pip.
+    ```sh
+    pip install csvkit
+    ```
+  - **Usage**:
+    ```sh
+    csvstat competitions/titanic/data/raw/train.csv
+    ```
+
+#### 4. **Basic Statistics**
+- **`csvkit`**: Generate summary statistics.
+  ```sh
+  csvstat competitions/titanic/data/raw/train.csv
+  ```
+
+- **`datamash`**: Use `datamash` to compute basic statistics for each column.
+  - **Installation**: Install `datamash` using your package manager (e.g., `apt-get`, `brew`).
+    ```sh
+    sudo apt-get install datamash
+    ```
+  - **Usage**:
+    ```sh
+    datamash -t, mean 2 median 2 min 2 max 2 < competitions/titanic/data/raw/train.csv
+    ```
+
+#### 5. **General Data Manipulation**
+- **`awk`**: Process and summarize the data.
+  ```sh
+  awk -F, '{sum+=$2; count+=1} END {print "Average: ", sum/count}' competitions/titanic/data/raw/train.csv
+  ```
+
+- **`cut`**: Extract specific columns for further analysis.
+  ```sh
+  cut -d, -f1,2,3 competitions/titanic/data/raw/train.csv
+  ```
+
+- **`sort`** and **`uniq`**: Sort data and find unique values.
+  ```sh
+  cut -d, -f3 competitions/titanic/data/raw/train.csv | sort | uniq -c
+  ```
+
+### Example Workflow
+
+1. **View Initial Lines of Data**:
+   ```sh
+   head -n 10 competitions/titanic/data/raw/train.csv
+   ```
+
+2. **Count Missing Values**:
+   ```sh
+   awk -F, '{for(i=1;i<=NF;i++) if($i=="") c[i]++} END{for(i in c) print "Column " i ": " c[i] " null values"}' competitions/titanic/data/raw/train.csv
+   ```
+
+3. **Get Data Types and Statistics with `csvkit`**:
+   ```sh
+   csvstat competitions/titanic/data/raw/train.csv
+   ```
+
+4. **Summarize Age Column (e.g., mean, median) with `datamash`**:
+   ```sh
+   cut -d, -f6 competitions/titanic/data/raw/train.csv | datamash mean 1 median 1 min 1 max 1
+   ```
+
+5. **Find Unique Values in a Column**:
+   ```sh
+   cut -d, -f3 competitions/titanic/data/raw/train.csv | sort | uniq -c
+   ```
+
+By using these CLI tools, you can efficiently load, explore, and summarize your data directly from the terminal, allowing you to quickly gain insights and identify potential issues with your dataset.
