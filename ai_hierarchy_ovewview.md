@@ -1,3 +1,4 @@
+```markdown
 Artificial Intelligence (AI)
 ├── Machine Learning (ML)
 │   ├── Supervised Learning
@@ -88,3 +89,4 @@ Artificial Intelligence (AI)
     ├── Bayesian Networks
     ├── Markov Random Fields
     └── Hidden Markov Models (HMM)
+```
